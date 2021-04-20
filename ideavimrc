@@ -18,8 +18,16 @@ inoremap <CR> <CR>
 nnoremap <Tab> gt
 nnoremap <S-Tab> gT
 
+" navigate n
+nnoremap <leader>nt :action Switcher<CR>
+nnoremap <leader>nb :action Back<CR>
+nnoremap <leader>nf :action Forward<CR>
+
 " similar to my vim Nerd tree mapping
-nnoremap <leader>n :action ActivateProjectToolWindow<CR>
+" navigate to left-tree
+" nnoremap <leader>nt :action ActivateProjectToolWindow<CR>
+
+
 
 " misc actions
 nnoremap <leader>z :action HideAllWindows<CR>
@@ -95,13 +103,7 @@ nnoremap <leader>si :action GotoImplementation<CR>
 nnoremap <leader>ss :action GotoSuperMethod<CR>
 nnoremap <leader>sd :action QuickImplementations<CR>
 nnoremap <leader>st :action GotoTypeDeclaration<CR>
-nnoremap <leader>sp :action Scala.TypeInfo<CR>:action ExpressionTypeInfo<CR>
-vnoremap <leader>sp <Esc>gvhh:<bs><bs><bs><bs><bs>action VimVisualSwapSelections<cr>:action Scala.TypeInfo<CR>:action ExpressionTypeInfo<CR>gv
-nnoremap <leader>sq :action Scala.GoToImplicit<CR>
-vnoremap <leader>sq <Esc>gvhh:<bs><bs><bs><bs><bs>action VimVisualSwapSelections<cr>:action Scala.GoToImplicit<CR>
-nnoremap <leader>sQ :action Scala.ShowImplicitParameters<CR>
 nnoremap <leader>sb :action ShowNavBar<CR>
-nnoremap <leader>sn :action SelectIn<CR>
 nnoremap <leader>se :action ShowErrorDescription<CR>
 
 " ideavim regex are a bit buggy, cannot use regex from vimrc
@@ -132,7 +134,7 @@ nnoremap <leader>gi :action ImplementMethods<CR>
 nnoremap <leader>gd :action DelegateMethods<CR>
 
 " bookmarks (a bit similar to vim marks)
-nnoremap <leader>m :action ToggleBookmarkWithMnemonic<CR>
+nnoremap <leader>mk :action ToggleBookmarkWithMnemonic<CR>
 nnoremap <leader>' :action ShowBookmarks<CR>
 nnoremap <leader>` :action ShowBookmarks<CR>
 nnoremap ]b :action GotoNextBookmark<CR>
