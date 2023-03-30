@@ -1,0 +1,183 @@
+" source ~/.vimrc
+
+
+
+set visualbell
+set noerrorbells
+set surround
+set relativenumber
+
+
+let mapleader = ","
+
+" disable mappings from .vimrc
+inoremap <C-U> <C-U>
+inoremap <CR> <CR>
+
+" in vim i use Tab to switch buffers
+nnoremap <Tab> gt
+nnoremap <S-Tab> gT
+
+" navigate n
+nnoremap <leader>nt :action Switcher<CR>
+nnoremap <leader>nb :action Back<CR>
+nnoremap <leader>nf :action Forward<CR>
+
+" similar to my vim Nerd tree mapping
+" navigate to left-tree
+" nnoremap <leader>nt :action ActivateProjectToolWindow<CR>
+
+
+
+" misc actions
+nnoremap <leader>z :action HideAllWindows<CR>
+nnoremap <leader>x :q<CR>
+" unknow
+" inoremap ;; <Esc>:action EditorCompleteStatement<CR>
+
+" build and debug actions
+" nnoremap <leader>Bp :action ViewBreakpoints<CR>
+" nnoremap <leader>bP :action EditBreakpoint<CR>
+" nnoremap <leader>bp :action ToggleLineBreakpoint<CR>
+" nnoremap <leader>bB :action Compile<CR>
+" nnoremap <leader>bb :action CompileDirty<CR>
+nnoremap <leader>bm :action Maven.ExecuteGoal<CR>
+" nnoremap <leader>bM :action ActivateMavenProjectsToolWindow<CR>
+" nnoremap <leader>bx :action RunClass<CR>
+" nnoremap <leader>bX :action DebugClass<CR>
+" nnoremap <leader>br :action Run<CR>
+" nnoremap <leader>bR :action ChooseRunConfiguration<CR>
+nnoremap <leader>bd :action Debug<CR>
+nnoremap <leader>bD :action ChooseDebugConfiguration<CR>
+" nnoremap <leader>bc :action CreateRunConfiguration<CR>
+" nnoremap <leader>bC :action editRunConfigurations<CR>
+
+" version control actions
+" nnoremap ]v :action VcsShowNextChangeMarker<CR>
+" nnoremap [v :action VcsShowPrevChangeMarker<CR>
+" nnoremap <leader>vd :action VcsShowCurrentChangeMarker<CR>
+" nnoremap <leader>vr :action Vcs.RollbackChangedLines<CR>
+nnoremap <leader>vu :action Vcs.UpdateProject<CR>
+nnoremap <leader>vp :action Vcs.Push<CR>
+nnoremap <leader>vc :action Vcs.QuickListPopupAction<CR>
+nnoremap <leader>vb :action Git.Branches<CR>
+nnoremap <leader>vv :action ActivateVersionControlToolWindow<CR>
+nnoremap <leader>va :set norelativenumber<CR>:action Annotate<CR>
+
+" extract actions
+nnoremap <leader>ei :action ExtractInterface<CR>
+nnoremap <leader>es :action ExtractSuperclass<CR>
+nnoremap <leader>en :action ExtractClass<CR>
+nnoremap <leader>em :action ExtractMethod<CR>
+vnoremap <leader>em <Esc>gvhh:<bs><bs><bs><bs><bs>action VimVisualSwapSelections<cr>:action ExtractMethod<CR>
+nnoremap <leader>ev :action IntroduceVariable<CR>
+vnoremap <leader>ev <Esc>gvhh:<bs><bs><bs><bs><bs>action VimVisualSwapSelections<cr>:action IntroduceVariable<CR>
+nnoremap <leader>ef :action IntroduceField<CR>
+vnoremap <leader>ef <Esc>gvhh:<bs><bs><bs><bs><bs>action VimVisualSwapSelections<cr>:action IntroduceField<CR>
+nnoremap <leader>ep :action IntroduceParameter<CR>
+vnoremap <leader>ep <Esc>gvhh:<bs><bs><bs><bs><bs>action VimVisualSwapSelections<cr>:action IntroduceParameter<CR>
+nnoremap <leader>ec :action IntroduceConstant<CR>
+vnoremap <leader>ec <Esc>gvhh:<bs><bs><bs><bs><bs>action VimVisualSwapSelections<cr>:action IntroduceConstant<CR>
+
+" refactoring actions
+nnoremap <leader>ri :action Inline<CR>
+nnoremap <leader>rr :action RenameElement<CR>i
+nnoremap <leader>rj :action MemberPushDown<CR>
+nnoremap <leader>rk :action MemberPullUp<CR>
+nnoremap <leader>rs :action ChangeSignature<CR>
+nnoremap <leader>rd :action SafeDelete<CR>
+nnoremap <leader>rm :action Move<CR>
+nnoremap <leader>rc :action CopyElement<CR>
+
+" fix actions
+"nnoremap <leader>ff :action ReformatCode<CR>
+vnoremap <leader>ff <Esc>gvhh:<bs><bs><bs><bs><bs>action VimVisualSwapSelections<cr>:action ReformatCode<CR>gv
+nnoremap <leader>fi :action OptimizeImports<CR>
+"nnoremap <leader>fa :action ShowIntentionActions<CR><Esc>
+
+" navigation ans search
+nnoremap <leader>sc :action GotoClass<CR>
+nnoremap <leader>sf :action GotoFile<CR>
+"去掉showUages，用处不大
+"nnoremap <leader>su :action ShowUsages<CR>
+nnoremap <leader>su :action FindUsages<CR>
+"大写的也去掉，容易忘记
+"nnoremap <leader>sU :action FindUsages<CR>
+nnoremap <leader>si :action GotoImplementation<CR>
+nnoremap <leader>ss :action GotoSuperMethod<CR>
+"nnoremap <leader>sd :action QuickImplementations<CR>
+nnoremap <leader>st :action GotoTypeDeclaration<CR>
+nnoremap <leader>sb :action ShowNavBar<CR>
+"nnoremap <leader>se :action ShowErrorDescription<CR>
+
+" ideavim regex are a bit buggy, cannot use regex from vimrc
+" 当前位置和类名之前跳转
+nnoremap ]c /\\<trait\>\\\|\\<class\>\\\|\\<object\>\\\|\\<interface\>\\\|\\<enum\><CR>w:nohlsearch<CR>
+nnoremap [c b?\\<trait\>\\\|\\<class\>\\\|\\<object\>\\\|\\<interface\>\\\|\\<enum\><CR>w:nohlsearch<CR>
+
+"  未知作用
+" nnoremap ]d /\\<def\><CR>w:nohlsearch<CR>
+" nnoremap [d b?\\<def\><CR>w:nohlsearch<CR>
+
+nnoremap ]e :action GotoNextError<CR>
+nnoremap [e :action GotoPreviousError<CR>
+
+" hierarchy actions
+" nnoremap <leader>hh :action TypeHierarchy<CR>
+" nnoremap <leader>hm :action MethodHierarchy<CR>
+" nnoremap <leader>hc :action CallHierarchy<CR>
+" nnoremap <leader>hd :action ShowUmlDiagramPopup<CR>
+
+" generate actions
+nnoremap <leader>ge :action GenerateEquals<CR>
+" nnoremap <leader>gg :action GenerateGetter<CR>
+" nnoremap <leader>gs :action GenerateSetter<CR>
+nnoremap <leader>ga :action GenerateGetterAndSetter<CR>
+nnoremap <leader>gc :action GenerateConstructor<CR>
+nnoremap <leader>gt :action Actions.ActionsPlugin.GenerateToString<CR>
+nnoremap <leader>go :action OverrideMethods<CR>
+nnoremap <leader>gi :action ImplementMethods<CR>
+" nnoremap <leader>gd :action DelegateMethods<CR>
+
+" bookmarks (a bit similar to vim marks)
+nnoremap <leader>mk :action ToggleBookmarkWithMnemonic<CR>
+nnoremap <leader>md :action DeleteMnemonicFromBookmark<CR>
+nnoremap <leader>md :action DeleteMnemonicFromBookmark<CR>
+
+nnoremap <leader>' :action ShowBookmarks<CR>
+" nnoremap <leader>` :action ShowBookmarks<CR>
+nnoremap ]b :action GotoNextBookmark<CR>
+nnoremap [b :action GotoPreviousBookmark<CR>
+
+" fix visual selection bug
+" 好像：跳到上次选择的内容位置
+nnoremap gv gvh
+
+" override settings from vimrc
+vnoremap v v
+vnoremap <C-v> <C-v>
+
+" toggle relative numbers
+nnoremap <F3> :set relativenumber!<CR>
+
+" comment a line, similar to tpope/vim-commentary
+nnoremap gcc :action CommentByLineComment<CR>
+vnoremap gc :<bs><bs><bs><bs><bs>action VimVisualSwapSelections<cr>:action CommentByLineComment<CR>gv
+" 未知作用
+" nnoremap gcap vap:<bs><bs><bs><bs><bs>action VimVisualSwapSelections<cr>:action CommentByLineComment<CR>gv
+
+" lombok
+" nnoremap <leader>ld :action defaultLombokData<CR>
+" nnoremap <leader>le :action defaultLombokEqualsAndHashcode<CR>
+" nnoremap <leader>lg :action defaultLombokGetter<CR>
+" nnoremap <leader>ll :action defaultLombokLocgger<CR>
+" nnoremap <leader>ls :action defaultLombokSetter<CR>
+" nnoremap <leader>lt :action defaultLombokToString<CR>
+" nnoremap <leader>lr ?\\<class\>\\\|\\<enum\><CR>:nohlsearch<CR>O@lombok.RequiredArgsConstructor<Esc>
+
+" this still doesn't work :(
+nnoremap <leader>/ /\\< \>
+nnoremap <leader>? ?\\< \>
+
+"maven
+" nnoremap <leader>mu :action Reload all<CR>
