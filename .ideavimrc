@@ -1,183 +1,226 @@
 " source ~/.vimrc
 
-
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+vim 行为设置
+vim basic setting
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 set visualbell
+" 错误指令时，不发出“duang duang"的声音 : no vim error remind
 set noerrorbells
+" 超好用的功能，可以删除(ds)/修改(cs)/添加(ys)文本两端的符号 : ref:  https://gist.github.com/wilon/ac1fc66f4a79e7b0c161c80877c75c94
 set surround
+" 展示相对行号 : show relative line number
 set relativenumber
+" 展示行号 : show line number
+set number
+" 是/否(默认)自动高亮匹配的字符：是 :  highlight content searched when key "enter" pressed
+set hlsearch
+" 输入搜索关键字时，是/否(默认)自动高亮匹配的字符: 是 : highlight content searched when key letters pressed
+set incsearch	
+" 搜索忽略大小写 : ignore letter case when searching
+set ignorecase	
+" 在搜索时到达文件尾后是/否跳文件头继续搜索: 是 : loop search
+set wrapscan
+" 直接使用系统剪贴板 : use system clipboard
+set clipboard=unnamed
 
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+vim 起始键设置
+vim leader key
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 let mapleader = ","
 
+
 " disable mappings from .vimrc
+" 屏幕上翻一页
 inoremap <C-U> <C-U>
+" 屏幕下翻一页
 inoremap <CR> <CR>
 
-" in vim i use Tab to switch buffers
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+vim 窗口设置
+vim window setting
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"  
+" ***任何位置多次esc能回到编辑器窗口***
+"swither 是一个超级工具
+"窗口：弹出关于窗口的所有选项
+nnoremap <leader>ww :action Switcher<CR>
+"窗口：隐藏所有
+nnoremap <leader>wh :action HideAllWindows<CR>
+"窗口：退出
+nnoremap <leader>wq :q<CR>
+"窗口：project
+nnoremap <leader>wp :action ActivateProjectToolWindow<CR>
+"窗口：maven
+nnoremap <leader>wm :action ActivateMavenProjectsToolWindow<CR>
+"窗口：git
+nnoremap <leader>wg :action ActivateVersionControlToolWindow<CR>
+
+" tabs
+" 右侧标签
 nnoremap <Tab> gt
-nnoremap <S-Tab> gT
-
-" navigate n
-nnoremap <leader>nt :action Switcher<CR>
-nnoremap <leader>nb :action Back<CR>
-nnoremap <leader>nf :action Forward<CR>
-
-" similar to my vim Nerd tree mapping
-" navigate to left-tree
-" nnoremap <leader>nt :action ActivateProjectToolWindow<CR>
+" 左侧标签
+nnoremap <S-Ta> gT
 
 
 
-" misc actions
-nnoremap <leader>z :action HideAllWindows<CR>
-nnoremap <leader>x :q<CR>
-" unknow
-" inoremap ;; <Esc>:action EditorCompleteStatement<CR>
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+vim 搜索设置
+vim search setting
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" build and debug actions
-" nnoremap <leader>Bp :action ViewBreakpoints<CR>
-" nnoremap <leader>bP :action EditBreakpoint<CR>
-" nnoremap <leader>bp :action ToggleLineBreakpoint<CR>
-" nnoremap <leader>bB :action Compile<CR>
-" nnoremap <leader>bb :action CompileDirty<CR>
-nnoremap <leader>bm :action Maven.ExecuteGoal<CR>
-" nnoremap <leader>bM :action ActivateMavenProjectsToolWindow<CR>
-" nnoremap <leader>bx :action RunClass<CR>
-" nnoremap <leader>bX :action DebugClass<CR>
-" nnoremap <leader>br :action Run<CR>
-" nnoremap <leader>bR :action ChooseRunConfiguration<CR>
-nnoremap <leader>bd :action Debug<CR>
-nnoremap <leader>bD :action ChooseDebugConfiguration<CR>
-" nnoremap <leader>bc :action CreateRunConfiguration<CR>
-" nnoremap <leader>bC :action editRunConfigurations<CR>
+" search
+" 全局搜索
+nnoremap <leader>sp :action FindInPath<CR>
 
-" version control actions
-" nnoremap ]v :action VcsShowNextChangeMarker<CR>
-" nnoremap [v :action VcsShowPrevChangeMarker<CR>
-" nnoremap <leader>vd :action VcsShowCurrentChangeMarker<CR>
-" nnoremap <leader>vr :action Vcs.RollbackChangedLines<CR>
-nnoremap <leader>vu :action Vcs.UpdateProject<CR>
-nnoremap <leader>vp :action Vcs.Push<CR>
-nnoremap <leader>vc :action Vcs.QuickListPopupAction<CR>
-nnoremap <leader>vb :action Git.Branches<CR>
-nnoremap <leader>vv :action ActivateVersionControlToolWindow<CR>
-nnoremap <leader>va :set norelativenumber<CR>:action Annotate<CR>
 
-" extract actions
-nnoremap <leader>ei :action ExtractInterface<CR>
-nnoremap <leader>es :action ExtractSuperclass<CR>
-nnoremap <leader>en :action ExtractClass<CR>
-nnoremap <leader>em :action ExtractMethod<CR>
-vnoremap <leader>em <Esc>gvhh:<bs><bs><bs><bs><bs>action VimVisualSwapSelections<cr>:action ExtractMethod<CR>
-nnoremap <leader>ev :action IntroduceVariable<CR>
-vnoremap <leader>ev <Esc>gvhh:<bs><bs><bs><bs><bs>action VimVisualSwapSelections<cr>:action IntroduceVariable<CR>
-nnoremap <leader>ef :action IntroduceField<CR>
-vnoremap <leader>ef <Esc>gvhh:<bs><bs><bs><bs><bs>action VimVisualSwapSelections<cr>:action IntroduceField<CR>
-nnoremap <leader>ep :action IntroduceParameter<CR>
-vnoremap <leader>ep <Esc>gvhh:<bs><bs><bs><bs><bs>action VimVisualSwapSelections<cr>:action IntroduceParameter<CR>
-nnoremap <leader>ec :action IntroduceConstant<CR>
-vnoremap <leader>ec <Esc>gvhh:<bs><bs><bs><bs><bs>action VimVisualSwapSelections<cr>:action IntroduceConstant<CR>
 
-" refactoring actions
-nnoremap <leader>ri :action Inline<CR>
-nnoremap <leader>rr :action RenameElement<CR>i
-nnoremap <leader>rj :action MemberPushDown<CR>
-nnoremap <leader>rk :action MemberPullUp<CR>
-nnoremap <leader>rs :action ChangeSignature<CR>
-nnoremap <leader>rd :action SafeDelete<CR>
-nnoremap <leader>rm :action Move<CR>
-nnoremap <leader>rc :action CopyElement<CR>
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+vim goto设置 : 使用"TO"而不是"GO"
+vim goto setting : Use "TO" instead of "GO"
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" fix actions
-"nnoremap <leader>ff :action ReformatCode<CR>
-vnoremap <leader>ff <Esc>gvhh:<bs><bs><bs><bs><bs>action VimVisualSwapSelections<cr>:action ReformatCode<CR>gv
-nnoremap <leader>fi :action OptimizeImports<CR>
-"nnoremap <leader>fa :action ShowIntentionActions<CR><Esc>
+" goto 取T
+" 跳转到类
+nnoremap <leader>tc :action GotoClass<CR>
+" 跳转到文件
+nnoremap <leader>tf :action GotoFile<CR>
+" 弹出/跳转到被使用位置
+nnoremap <leader>tu :action ShowUsages<CR>
+" 跳转到实现类
+nnoremap <leader>ti :action GotoImplementation<CR>
+" 跳转到父类
+nnoremap <leader>ts :action GotoSuperMethod<CR>
+" 跳转类声明/定义
+nnoremap <leader>tt :action GotoTypeDeclaration<CR>
+" 待定
+" nnoremap <leader>sb :action ShowNavBar<CR>
 
-" navigation ans search
-nnoremap <leader>sc :action GotoClass<CR>
-nnoremap <leader>sf :action GotoFile<CR>
-"去掉showUages，用处不大
-"nnoremap <leader>su :action ShowUsages<CR>
-nnoremap <leader>su :action FindUsages<CR>
-"大写的也去掉，容易忘记
-"nnoremap <leader>sU :action FindUsages<CR>
-nnoremap <leader>si :action GotoImplementation<CR>
-nnoremap <leader>ss :action GotoSuperMethod<CR>
-"nnoremap <leader>sd :action QuickImplementations<CR>
-nnoremap <leader>st :action GotoTypeDeclaration<CR>
-nnoremap <leader>sb :action ShowNavBar<CR>
-"nnoremap <leader>se :action ShowErrorDescription<CR>
 
-" ideavim regex are a bit buggy, cannot use regex from vimrc
-" 当前位置和类名之前跳转
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+vim 前进后退设置 : 使用 "[" 和 "]"
+vim forward and backward settings : use "[" and "]"
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" 涉及可以前后反复跳转
+" 当前位置跳转到类名位置
 nnoremap ]c /\\<trait\>\\\|\\<class\>\\\|\\<object\>\\\|\\<interface\>\\\|\\<enum\><CR>w:nohlsearch<CR>
-nnoremap [c b?\\<trait\>\\\|\\<class\>\\\|\\<object\>\\\|\\<interface\>\\\|\\<enum\><CR>w:nohlsearch<CR>
-
-"  未知作用
-" nnoremap ]d /\\<def\><CR>w:nohlsearch<CR>
-" nnoremap [d b?\\<def\><CR>w:nohlsearch<CR>
-
+" 跳到上个错误位
 nnoremap ]e :action GotoNextError<CR>
-nnoremap [e :action GotoPreviousError<CR>
+" 跳到下个错误位
+nnoremap ]e :action GotoNextError<CR>
+" 跳到下次编辑焦点 : forward point
+nnoremap ]p :action Forward<CR>
+" 跳回上次编辑焦点 : back point
+nnoremap [p :action Back<CR>
+" 跳转上个标记mark
+nnoremap ]m :action GotoNextBookmark<CR>
+" 跳转下个标记
+nnoremap [m :action GotoPreviousBookmark<CR>
+" 跳到上次选择的文本 : last selected sentence
+nnoremap [s gvh
+" not working
+" nnoremap  ]t NextTab
+" nnoremap  [t PreviousTab
 
-" hierarchy actions
-" nnoremap <leader>hh :action TypeHierarchy<CR>
-" nnoremap <leader>hm :action MethodHierarchy<CR>
-" nnoremap <leader>hc :action CallHierarchy<CR>
-" nnoremap <leader>hd :action ShowUmlDiagramPopup<CR>
+" maven 不起作用 : not working
+" nnoremap <leader>mr :action Reload all<CR>
+" 弹出maven运行框，指定goal后执行
+nnoremap <leader>mg :action Maven.ExecuteGoal<CR>
 
-" generate actions
-nnoremap <leader>ge :action GenerateEquals<CR>
-" nnoremap <leader>gg :action GenerateGetter<CR>
-" nnoremap <leader>gs :action GenerateSetter<CR>
-nnoremap <leader>ga :action GenerateGetterAndSetter<CR>
-nnoremap <leader>gc :action GenerateConstructor<CR>
-nnoremap <leader>gt :action Actions.ActionsPlugin.GenerateToString<CR>
-nnoremap <leader>go :action OverrideMethods<CR>
-nnoremap <leader>gi :action ImplementMethods<CR>
-" nnoremap <leader>gd :action DelegateMethods<CR>
 
-" bookmarks (a bit similar to vim marks)
-nnoremap <leader>mk :action ToggleBookmarkWithMnemonic<CR>
-nnoremap <leader>md :action DeleteMnemonicFromBookmark<CR>
-nnoremap <leader>md :action DeleteMnemonicFromBookmark<CR>
 
-nnoremap <leader>' :action ShowBookmarks<CR>
-" nnoremap <leader>` :action ShowBookmarks<CR>
-nnoremap ]b :action GotoNextBookmark<CR>
-nnoremap [b :action GotoPreviousBookmark<CR>
+" build 不起作用 : not working
+" nnoremap <leader>bb :action Compile<CR>
 
-" fix visual selection bug
-" 好像：跳到上次选择的内容位置
-nnoremap gv gvh
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+vim debug : 使用 "d"
+vim debug settings : use "d"
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" override settings from vimrc
-vnoremap v v
-vnoremap <C-v> <C-v>
+" debug 
+" 执行上次调试命令：debug with last config setting 
+nnoremap <leader>dd :action Debug<CR>
+" 调试指定配置/记录项，选择后即可执行 : debug with config setting seleted
+nnoremap <leader>dc :action ChooseDebugConfiguration<CR>
 
-" toggle relative numbers
-nnoremap <F3> :set relativenumber!<CR>
 
-" comment a line, similar to tpope/vim-commentary
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+vim git : 使用 "g"
+vim git settings : use "g"
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" 弹出git操作菜单 : pop QuickList 
+nnoremap <leader>gp :action Vcs.QuickListPopupAction<CR>
+" git更新 : update
+nnoremap <leader>gu :action Vcs.UpdateProject<CR>
+" 下个变动 : ShowNextChangeMarker
+nnoremap <leader>gf :action VcsShowNextChangeMarker<CR>
+" 上个变动 : ShowPrevChangeMarker
+nnoremap <leader>gb :action VcsShowPrevChangeMarker<CR>
+
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+vim refactor : 使用 "r", 三字操作
+vim refactor settings : 3 letters with "r" started
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" 重构代码为独立方法 : ExtractMethod
+nnoremap <leader>rem :action ExtractMethod<CR>
+" 重命名 : RenameElement
+nnoremap <leader>rrn :action RenameElement<CR>i
+" 移动元素到子类，如果没有子类，则会提示创建 : move to sub class , create new one if not existed
+nnoremap <leader>rmu :action MemberPushDown<CR>
+" 移动元素到父类，如果没有父类，则会提示创建 : move to father class , create new one if not existed
+nnoremap <leader>rmd :action MemberPullUp<CR>
+" 变更签名 : ChangeSignature
+nnoremap <leader>rcs :action ChangeSignature<CR>
+" 优化包引用 : OptimizeImports
+nnoremap <leader>roi :action OptimizeImports<CR>
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+vim 标签 : 使用 "m", 三字操作
+vim bookmark settings : use "'"
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" 标记，会弹出pop框，使用对应的标记即可 : pop and select mark tag
+nnoremap <leader>'a :action ToggleBookmarkWithMnemonic<CR>
+" 展示所有的标记，可以选择对应标记跳转 : show all bookmarks, delete or select target
+nnoremap <leader>'s :action ShowBookmarks<CR>
+" nothing happened 删除标记，此指令不起作用。可以使用展示所有标记命令后，使用delete键删除对应标记 : not working
+" nnoremap <leader>'d :action RemoveMnemonic<CR>
+
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+vim 特殊 
+vim sepecial settings 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" 注释行 : Comment By LineComment
 nnoremap gcc :action CommentByLineComment<CR>
-vnoremap gc :<bs><bs><bs><bs><bs>action VimVisualSwapSelections<cr>:action CommentByLineComment<CR>gv
-" 未知作用
-" nnoremap gcap vap:<bs><bs><bs><bs><bs>action VimVisualSwapSelections<cr>:action CommentByLineComment<CR>gv
 
-" lombok
-" nnoremap <leader>ld :action defaultLombokData<CR>
-" nnoremap <leader>le :action defaultLombokEqualsAndHashcode<CR>
-" nnoremap <leader>lg :action defaultLombokGetter<CR>
-" nnoremap <leader>ll :action defaultLombokLocgger<CR>
-" nnoremap <leader>ls :action defaultLombokSetter<CR>
-" nnoremap <leader>lt :action defaultLombokToString<CR>
-" nnoremap <leader>lr ?\\<class\>\\\|\\<enum\><CR>:nohlsearch<CR>O@lombok.RequiredArgsConstructor<Esc>
 
-" this still doesn't work :(
-nnoremap <leader>/ /\\< \>
-nnoremap <leader>? ?\\< \>
 
-"maven
-" nnoremap <leader>mu :action Reload all<CR>
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+vim 其它备注 
+vim other notes
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" 行移动，vim原生支持
+" 下移一行 : move line up
+" :m+1 
+" 上移二行 : move line down
+" :m-2 
+" 移动到指定行号 : move line to line No.
+" :m 5 移动到行号5
+" 移动多行 ：move multi lines 
+" v and m+2; v and m 2
